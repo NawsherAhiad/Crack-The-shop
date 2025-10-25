@@ -1,0 +1,10 @@
+python -m venv env
+
+env\Script\activate
+
+pip install Django
+
+pip install pillow
+
+
+py manage.py createsuperuser (changed the admin credentials with id mahi and pass: 1234)
