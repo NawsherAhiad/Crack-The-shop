@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %} Welcome {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-6">
+          <img src="https://img.freepik.com/premium-vector/girl-doing-online-shopping-by-smartphone_701961-2321.jpg" alt="" class="img-fluid">
+      </div>
+      <div style="padding: 80px;" class="col-md-6">
+          <h1 class="mt-4 mt-md-0">Online Shopping Site</h1>
+          <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nam officia dolores amet aliquam, magnam consequuntur vitae labore fugit dolorum placeat illo praesentium corrupti ab. Corrupti dicta similique dolorem rerum?
+          </p>
+      </div>
+  </div>
+</div>
+
+
+
+
+<div style="display: flex;">
+<hr style="flex-grow: 1;">
+<h2 style="text-align: center; margin: 0 10px; margin-bottom: 8px;" >Categories</h2>
+<hr style="flex-grow: 1;">
+</div>
+<div style="margin-bottom: 8px;" class="categories">
+    <!-- Start of the Bootstrap row -->
+    <div class="row">
+      {% for category in categories %}
+      <!-- Card -->
+      <div class="col-md-4">
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">{{category.name}}</h5>
+                  <p class="card-text">{{category.items.count}} items</p>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div> <!-- End of the category row -->
+  </div>
+
+<div style="display: flex;">
+    <hr style="flex-grow: 1;">
+    <h2 style="text-align: center; margin: 0 10px; margin-bottom: 8px;" >Newest items</h2>
+    <hr style="flex-grow: 1;">
+</div>
+<div class="item">
+  <!-- Start of the Bootstrap row -->
+  <div class="row">
+    {% for item in items %}
+    <!-- Card -->
+    <div class="col-md-3">
+        <a style="text-decoration: none;" href="{% url 'item:detail' item.id %}"> <!--Here item: is the app_name-->
+        <div class="card" style="margin-bottom: 15px;">
+            <img src="{{item.image.url}}" class="card-img-top" alt="Image 1" width="200px" height="200px">
+            <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text">$ {{item.price}}</p>
+            </div>
+        </div>
+    </a>
+    </div>
+    {% endfor %}
+</div> <!-- End of the item row -->
+</div>
+
+  <div class="reviews">
+    <div style="display: flex; margin-bottom: 8px;">
+        <hr style="flex-grow: 1">
+        <h2 style="text-align: center; margin: 0 10px;">Customer Review</h2>
+        <hr style="flex-grow: 1">
+    </div>
+    
+    <div class="row" style="margin-bottom: 15px;">
+      {% for review in reviews %}
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><sub><ion-icon name="person-circle-outline" style="font-size: 22px;"></ion-icon></sub> {{review.name}}</h5>
+              <p>{{review.email}}</p>
+              <hr>
+              <p class="card-text">{{review.message}}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+  </div>
+{% endblock %}
+
+
+
+

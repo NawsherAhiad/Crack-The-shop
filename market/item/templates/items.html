@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Items{% endblock %}
+{% block content %}
+    <div class="row">
+        <!-- Fixed Sidebar -->
+        <div class="col-md-3 my-5 fixed-sidebar">
+            <!-- Sidebar Content -->
+            <form method="get" action="{% url 'item:items' %}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="query" placeholder="Search an item" aria-label="Search an item" aria-describedby="search-button">
+                    <button style="border: 1px solid #C0C0C0;"  class="btn btn-light" type="submit" id="search-button"><sub><ion-icon name="search-outline" style="font-size: 18px;"></ion-icon></sub> Search</button>
+                </div>
+            </form>
+            <hr class="my-4">
+            <!-- <h3>Categories</h3> -->
+            <div class="list-group">
+                <a href="{% url 'item:items' %}" class="list-group-item list-group-item-action" aria-current="true">
+                   All categories
+                </a>
+                {% for category in categories %}
+                <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}" class="list-group-item list-group-item-action">{{ category.name }}</a>
+                {% endfor %}
+              </div>
+        </div>
+        <!-- Content Area -->
+        <div class="col-md-9 content">
+            <h2 class="my-3"><sub><ion-icon name="pricetags-outline" style="font-size: 30px;"></ion-icon></sub> All Items</h2>
+            <div class="row">
+                {% for item in items %}
+                <!-- Card -->
+                <div class="col-md-4">
+                    <a href="{% url 'item:detail' item.id %}" class="text-decoration-none">
+                        <div class="card mb-4">
+                            <img src="{{item.image.url}}" class="card-img-top" alt="{{ item.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.name }}</h5>
+                                <p class="card-text">Price: {{ item.price }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

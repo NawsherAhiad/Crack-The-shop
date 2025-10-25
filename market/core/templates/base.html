@@ -1,0 +1,81 @@
+<!doctype html>
+ <html lang="en">
+   <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <title>{% block title %} {% endblock %} | Market</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+   </head>
+   <body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+          <!-- Logo or Brand Name -->
+          <a class="navbar-brand" href="{% url 'core:index' %}">Shoppy</a>
+  
+          <!-- Toggle Button for Mobile -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <!-- Navigation Links -->
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'item:new' %}">New Item</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'core:review' %}">Feedback</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'item:items' %}">Browse</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'dashboard:index' %}">Dashboard</a>
+                  </li>
+              </ul>
+          </div>
+  
+          <!-- User Actions (Login, Logout, Inbox) -->
+          <div class="nav-item">
+              {% if request.user.is_authenticated %}
+                  <a class="nav-link" href="{% url 'core:logout' %}"><sub><ion-icon name="backspace-outline" style="font-size: 20px;"></ion-icon></sub> Logout</a>
+                  <a class="nav-link" href="{% url 'conversation:inbox' %}"><sub><ion-icon name="chatbubbles-outline"  style="font-size: 20px;"></ion-icon></sub> Inbox</a>
+              {% else %}
+              <a class="btn btn-light" href="{% url 'core:signup' %}">
+                <sub><ion-icon name="person-add-outline" style="font-size: 15px;"></ion-icon></sub> Signup
+            </a>
+                  <a class="btn btn-light" href="{% url 'core:login' %}"><sub><ion-icon name="log-in-outline" style="font-size: 18px;"></ion-icon></sub> Login</a>
+              {% endif %}
+          </div>
+      </div>
+  </nav>
+    <!--End Navbar-->
+    
+    <!--Main contain-->
+   <div class="container">
+
+    {% block content %}
+    {% endblock %}
+
+    </div>
+    <!--End Main contain-->
+
+    <!--footer-->
+    <footer class="bg-body-tertiary text-center text-body-secondary py-4">
+      <div class="container">
+          <p>This template built for <a style="text-decoration: none;" href="#">ShoppingSite</a> by <a style="text-decoration: none;" href="#">@iftakhirnibir</a>.</p>
+          <p class="mb-0">
+              <a style="text-decoration: none;" href="#top">Back to top</a>
+          </p>
+      </div>
+    </footer> 
+    <!--End footer--> 
+     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+   </body>
+ </html>
+

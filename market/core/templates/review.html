@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Feedback{% endblock %}
+{% block content %} 
+    <div class="row justify-content-center align-items-center" style="height: 80vh;">
+        <div class="col-md-6">
+            <div style="text-align: center;" class="icon">
+                <ion-icon name="mail-unread-outline" style="font-size: 50px;"></ion-icon>
+              </div>
+            <h1 class="text-center">Give Your Feedback Here</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    {% if request.user.is_authenticated %}
+                    <input type="text" class="form-control" name="name" value="{{request.user.username}}">
+                    {% else %}
+                    <input type="text" class="form-control" name="name">
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email address</label>
+                    {% if request.user.is_authenticated %}
+                    <input type="email" class="form-control" name="email" value="{{request.user.email}}">
+                    {% else %}
+                    <input type="email" class="form-control" name="email">
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control" name="message" rows="3"></textarea>
+                </div>
+                <button style="border: 1px solid #C0C0C0;" type="submit" class="btn btn-light">Submit <sub><ion-icon name="send-outline" style="font-size: 18px;"></ion-icon></sub></button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

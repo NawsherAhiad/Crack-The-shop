@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Conversation{% endblock %}
+
+{% block content %}
+    <h1 class="mb-2">Conversation</h1>
+    {% for member in conversation.members.all %}
+    {% if member != request.user %}
+    <h4><sub><ion-icon name="person-circle-outline" style="font-size: 25px;"></ion-icon></sub> {{ member.username }}</h4>
+    {% endif %}
+    {% endfor %}
+
+    <div class="message-container">
+        {% for message in conversation.messages.all %}
+        <div class="{% if message.created_by == request.user %}message-right{% else %}message-left{% endif %}">
+            <p>{{ message.content }} <sub>{{ message.created_at }}</sub></p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="sendingform">
+    <form method="post" action=".">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button style="border: 1px solid #C0C0C0;" type="submit" class="btn btn-light">Send <sub><ion-icon name="send-outline" style="font-size: 18px;"></ion-icon></sub></button>
+    </form>
+</div>
+
+<style>
+    .message-right {
+        text-align: right;
+        background-color: #f0f0f0;
+        border-radius: 15px;
+        padding: 3px;
+        margin-bottom: 10px;
+    }
+
+    .message-left {
+        text-align: left;
+        background-color:  #d3cbcb;
+        color: black;
+        border-radius: 15px;
+        padding: 3px;
+        margin-bottom: 10px;
+        padding-left: 15px;
+    }
+
+    .sendingform{
+        margin-bottom: 10px;
+    }
+</style>
+
+{% endblock %}

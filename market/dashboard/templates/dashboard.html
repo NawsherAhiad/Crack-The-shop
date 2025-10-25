@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="icon" style="text-align: center;">
+<ion-icon name="person-circle" style="font-size: 90px;"></ion-icon>
+<p><b>Username: </b>{{request.user.username}}</p>
+<p><b>Email address: </b>{{request.user.email}}</p>
+</div>
+{% endif %}
+<div style="display: flex;">
+    <hr style="flex-grow: 1;">
+    <h2 style="text-align: center; margin: 0 10px; margin-bottom: 8px;" >My items</h2>
+    <hr style="flex-grow: 1;">
+</div>
+
+<div class="item">
+  <!-- Start of the items row -->
+  <div class="row">
+    {% for item in items %}
+    <!-- Card -->
+    <div class="col-md-4">
+        <a style="text-decoration: none;" href="{% url 'item:detail' item.id %}">
+        <div class="card">
+            <img src="{{item.image.url}}" class="card-img-top" alt="Image 1">
+            <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text">Price: {{item.price}}</p>
+            </div>
+        </div>
+    </a>
+    </div>
+    {% endfor %}
+</div> <!-- End of the items row -->
+</div>
+{% endblock %}
+
+
+
+

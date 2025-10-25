@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} SignUp {% endblock %}
+{% block content %}
+<div style="margin-bottom: 85px;" class="row justify-content-center align-items-center">
+  <div class="col-md-6 my-4">
+    <div style="text-align: center;" class="icon">
+      <ion-icon name="log-in-sharp" style="font-size: 50px;"></ion-icon>
+    </div>
+<h1 style="text-align: center;">Log In</h1>
+<form method="post" action="."><!--action dot means return action on the same page-->
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label><br>
+        {{form.username}}
+      </div>
+      <div class="mb-3">
+        <label for="password1" class="form-label">Password</label><br>
+        {{form.password}}
+      </div>
+      {% if form.errors or form.non_field_errors %}
+      <div class="mb-3 p-6 bg-red-100 rounded-xl">
+          {% for field in form %}
+              {{ field.errors }}
+          {% endfor %}
+
+          {{ form.non_field_errors }}
+      </div>
+  {% endif %} 
+    <button style="border: 1px solid #C0C0C0;" type="submit" class="btn btn-light">Submit <sub><ion-icon name="send-outline" style="font-size: 18px;"></ion-icon></sub></button>
+  </form>
+</div>
+</div>
+{% endblock %}
+
+
